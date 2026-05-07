@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import calButtton from "../assets/images/icon-calculator.svg";
-import logo from "../assets/images/illustration-empty.svg";
+
 export const Home = () => {
   const [formState, setFormState] = useState({
     amount: "",
     term: "",
     rate: "",
-    type: "repayment" || "interest",
+    type: "repayment",
   });
   const handleSumbmit = (e) => {
     e.preventDefault();
