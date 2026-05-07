@@ -8,6 +8,9 @@ export const Home = () => {
     rate: "",
     type: "repayment" || "interest",
   });
+  const handleSumbmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div
       className="home-page py-5 p-md-0 d-flex align-items-center"
@@ -21,7 +24,7 @@ export const Home = () => {
               Clear All
             </span>
           </div>
-          <form className="d-flex flex-column gap-3">
+          <form className="d-flex flex-column gap-3" onSubmit={handleSumbmit}>
             <div>
               <label htmlFor="amount">Mortgage Amount</label>
               <div className="d-flex">
