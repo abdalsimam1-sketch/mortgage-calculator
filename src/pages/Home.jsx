@@ -8,8 +8,40 @@ export const Home = () => {
     rate: "",
     type: "repayment",
   });
+  const [errors, setErrors] = useState({
+    amountError: "",
+    termError: "",
+    rateError: "",
+  });
+
   const handleSumbmit = (e) => {
+    let hasError = false;
     e.preventDefault();
+    if (isNaN(formState.amount)) {
+      setErrors((current) => ({
+        ...current,
+        amountError: "Amount has to be a number",
+      }));
+      hasError = true;
+    }
+
+    if (isNaN(formState.rate)) {
+      setErrors((current) => ({
+        ...current,
+        rateError: "Rate has to be a number",
+      }));
+      hasError = true;
+    }
+    if (isNaN(formState.term)) {
+      setErrors((current) => ({
+        ...current,
+        termError: "Years has to be a number",
+      }));
+      hasError = true;
+    }
+    if (hasError) {
+      return;
+    }
   };
   return (
     <div
@@ -26,7 +58,12 @@ export const Home = () => {
           </div>
           <form className="d-flex flex-column gap-3" onSubmit={handleSumbmit}>
             <div>
-              <label htmlFor="amount">Mortgage Amount</label>
+              <div>
+                <label htmlFor="amount">Mortgage Amount</label>
+                {errors.amountError && (
+                  <span className="text-danger">{errors.amountError}</span>
+                )}
+              </div>
               <div className="d-flex">
                 <div
                   style={{ backgroundColor: "var(--slate-300)" }}
