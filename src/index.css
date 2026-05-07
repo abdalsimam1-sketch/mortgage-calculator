@@ -26,6 +26,7 @@ main.app,
 button.cal-button,
 button.cal-button:hover {
   background-color: var(--lime);
+  width: 100%;
 }
 
 .logo-section {
@@ -49,5 +50,9 @@ button.cal-button:hover {
 @media (min-width: 768px) {
   .green-section {
     border-bottom-left-radius: 7rem;
+  }
+  button.cal-button,
+  button.cal-button:hover {
+    width: 50%;
   }
 }
