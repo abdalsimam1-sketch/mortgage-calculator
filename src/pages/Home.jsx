@@ -6,39 +6,60 @@ export const Home = () => {
     amount: "",
     term: "",
     rate: "",
-    type: "repayment",
+    type: "",
   });
   const [errors, setErrors] = useState({
     amountError: "",
     termError: "",
     rateError: "",
   });
+  const [mothlyPayment, setMonthlyPayment] = useState();
+  const [yearsPayment, setYearsPayment] = useState();
 
   const handleSumbmit = (e) => {
     let hasError = false;
     e.preventDefault();
-    if (isNaN(formState.amount)) {
+    setErrors({ amountError: "", termError: "", rateError: "" });
+    if (!formState.amount.trim()) {
       setErrors((current) => ({
         ...current,
-        amountError: "Amount has to be a number",
+        amountError: "Amount field cannot be empty",
+      }));
+      hasError = true;
+    } else if (Number(formState.amount) <= 0) {
+      setErrors((current) => ({
+        ...current,
+        amountError: "Amount has to be > 0",
+      }));
+      hasError = true;
+    }
+    if (!formState.rate.trim()) {
+      setErrors((current) => ({
+        ...current,
+        rateError: "Rate field cannot be empty",
+      }));
+      hasError = true;
+    } else if (Number(formState.rate) <= 0) {
+      setErrors((current) => ({
+        ...current,
+        rateError: "Rate has to be > 0",
+      }));
+      hasError = true;
+    }
+    if (!formState.term.trim()) {
+      setErrors((current) => ({
+        ...current,
+        termError: "Years cannot be empty",
+      }));
+      hasError = true;
+    } else if (Number(formState.term) <= 0) {
+      setErrors((current) => ({
+        ...current,
+        termError: "Years has to be > 0",
       }));
       hasError = true;
     }
 
-    if (isNaN(formState.rate)) {
-      setErrors((current) => ({
-        ...current,
-        rateError: "Rate has to be a number",
-      }));
-      hasError = true;
-    }
-    if (isNaN(formState.term)) {
-      setErrors((current) => ({
-        ...current,
-        termError: "Years has to be a number",
-      }));
-      hasError = true;
-    }
     if (hasError) {
       return;
     }
@@ -58,7 +79,7 @@ export const Home = () => {
           </div>
           <form className="d-flex flex-column gap-3" onSubmit={handleSumbmit}>
             <div>
-              <div>
+              <div className="d-flex justify-content-between">
                 <label htmlFor="amount">Mortgage Amount</label>
                 {errors.amountError && (
                   <span className="text-danger">{errors.amountError}</span>
@@ -81,13 +102,19 @@ export const Home = () => {
                   }
                   type="number"
                   id="amount"
-                  className="form-control rounded-start-0"
+                  className={`form-control ${errors.amountError ? "border-danger" : ""}  rounded-start-0`}
                 />
               </div>
             </div>
             <div className="row gap-3 gap-md-0">
               <div className="col-12 col-md-6">
-                <label htmlFor="term">Mortgage Term</label>
+                <div className="d-flex justify-content-between">
+                  <label htmlFor="term">Mortgage Term</label>
+                  {errors.termError && (
+                    <span className="text-danger">{errors.termError}</span>
+                  )}
+                </div>
+
                 <div className="d-flex">
                   <input
                     value={formState.term}
@@ -99,8 +126,9 @@ export const Home = () => {
                     }
                     type="number"
                     id="term"
-                    className="form-control rounded-end-0"
-                  />{" "}
+                    className={`form-control ${errors.termError ? "border-danger" : ""}  rounded-end-0`}
+                  />
+
                   <div
                     style={{ backgroundColor: "var(--slate-300)" }}
                     className="p-2 px-4 rounded-end"
@@ -110,12 +138,18 @@ export const Home = () => {
                 </div>
               </div>
               <div className="col-12 col-md-6">
-                <label htmlFor="rate">Interest Rate</label>
+                <div className="d-flex justify-content-between">
+                  <label htmlFor="rate">Interest Rate</label>
+                  {errors.rateError && (
+                    <span className="text-danger">{errors.rateError}</span>
+                  )}
+                </div>
+
                 <div className="d-flex">
                   <input
                     type="number"
                     id="rate"
-                    className="form-control "
+                    className={`form-control ${errors.rateError ? "border-danger" : ""} rounded-end-0`}
                     value={formState.rate}
                     onChange={(e) =>
                       setFormState((current) => ({
