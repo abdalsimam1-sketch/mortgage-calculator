@@ -37,6 +37,14 @@ button.cal-button:hover {
 .result {
   color: var(--lime);
 }
-.result-section.card {
+.result-section {
   border-top: 5px solid var(--lime);
+  border-radius: 1rem;
+}
+.form-section {
+  background-color: var(--white);
+  border-bottom-right-radius: 7px;
+}
+.green-section {
+  border-bottom-left-radius: 7rem;
 }

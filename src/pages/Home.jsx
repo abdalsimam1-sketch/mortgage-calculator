@@ -8,7 +8,7 @@ export const Home = () => {
       style={{ minHeight: "100vh" }}
     >
       <div className="container  d-flex flex-column  flex-md-row justify-content-md-center ">
-        <section className="col-12 col-md-6 card p-3 d-flex flex-column gap-4 ">
+        <section className="col-12 col-md-6 p-3 d-flex flex-column gap-4 form-section rounded-start ">
           <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
             <h1>Mortgage Calculator</h1>
             <span className="text-muted text-decoration-underline cursor-pointer d-inline">
@@ -61,7 +61,7 @@ export const Home = () => {
             </button>
           </div>
         </section>
-        <section className="col-12 col-md-6 card logo-section p-3 px-5 text-light">
+        <section className="col-12 col-md-6 logo-section p-3 px-5 text-light green-section rounded-end">
           <div className="d-flex flex-column gap-md-5">
             <div>
               <h2>Your Results</h2>
@@ -71,7 +71,7 @@ export const Home = () => {
                 calculate button again
               </p>
             </div>
-            <div className="card p-3 result-section">
+            <div className="p-3 result-section">
               <div className=" border-bottom">
                 <p className="text-light">Your monthly payments</p>
                 <h1 className="result">$1797.74</h1>
