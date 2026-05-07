@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import calButtton from "../assets/images/icon-calculator.svg";
 import logo from "../assets/images/illustration-empty.svg";
 export const Home = () => {
+  const [formState, setFormState] = useState({
+    amount: "",
+    term: "",
+    rate: "",
+    type: "repayment" || "interest",
+  });
   return (
     <div
       className="home-page py-5 p-md-0 d-flex align-items-center"
@@ -15,85 +21,130 @@ export const Home = () => {
               Clear All
             </span>
           </div>
-          <div>
-            <label htmlFor="amount">Mortgage Amount</label>
-            <div className="d-flex">
-              <div
-                style={{ backgroundColor: "var(--slate-300)" }}
-                className="p-2 px-4 rounded-start"
-              >
-                <span> $</span>
-              </div>
-              <input
-                type="number"
-                id="amount"
-                className="form-control rounded-start-0"
-              />
-            </div>
-          </div>
-          <div className="row gap-3 gap-md-0">
-            <div className="col-12 col-md-6">
-              <label htmlFor="term">Mortgage Term</label>
+          <form className="d-flex flex-column gap-3">
+            <div>
+              <label htmlFor="amount">Mortgage Amount</label>
               <div className="d-flex">
+                <div
+                  style={{ backgroundColor: "var(--slate-300)" }}
+                  className="p-2 px-4 rounded-start"
+                >
+                  <span> $</span>
+                </div>
                 <input
+                  value={formState.amount}
+                  onChange={(e) =>
+                    setFormState((current) => ({
+                      ...current,
+                      amount: e.target.value,
+                    }))
+                  }
                   type="number"
-                  id="term"
-                  className="form-control rounded-end-0"
-                />{" "}
-                <div
-                  style={{ backgroundColor: "var(--slate-300)" }}
-                  className="p-2 px-4 rounded-end"
-                >
-                  <span>years</span>
+                  id="amount"
+                  className="form-control rounded-start-0"
+                />
+              </div>
+            </div>
+            <div className="row gap-3 gap-md-0">
+              <div className="col-12 col-md-6">
+                <label htmlFor="term">Mortgage Term</label>
+                <div className="d-flex">
+                  <input
+                    value={formState.term}
+                    onChange={(e) =>
+                      setFormState((current) => ({
+                        ...current,
+                        term: e.target.value,
+                      }))
+                    }
+                    type="number"
+                    id="term"
+                    className="form-control rounded-end-0"
+                  />{" "}
+                  <div
+                    style={{ backgroundColor: "var(--slate-300)" }}
+                    className="p-2 px-4 rounded-end"
+                  >
+                    <span>years</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-md-6">
+                <label htmlFor="rate">Interest Rate</label>
+                <div className="d-flex">
+                  <input
+                    type="number"
+                    id="rate"
+                    className="form-control "
+                    value={formState.rate}
+                    onChange={(e) =>
+                      setFormState((current) => ({
+                        ...current,
+                        rate: e.target.value,
+                      }))
+                    }
+                  />
+                  <div
+                    style={{ backgroundColor: "var(--slate-300)" }}
+                    className="p-2 px-4 rounded-end"
+                  >
+                    <span>%</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="col-12 col-md-6">
-              <label htmlFor="rate">Interest Rate</label>
-
-              <div className="d-flex">
-                {" "}
-                <input type="number" id="rate" className="form-control " />
-                <div
-                  style={{ backgroundColor: "var(--slate-300)" }}
-                  className="p-2 px-4 rounded-end"
-                >
-                  <span>%</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="type-section d-flex flex-column gap-3">
-            <span>Mortgage Type</span>
-            <label
-              className="form-control d-flex gap-3 cursor-pointer"
-              id="repayment"
-            >
-              <input
-                type="checkbox"
+            <div className="type-section d-flex flex-column gap-3">
+              <span>Mortgage Type</span>
+              <label
+                className="form-control d-flex gap-3 cursor-pointer"
                 id="repayment"
-                className="cursor-pointer"
-              />
-              <label htmlFor="repayment" className="cursor-pointer">
-                Repayment
+              >
+                <input
+                  value={"repayment"}
+                  onChange={(e) =>
+                    setFormState((current) => ({
+                      ...current,
+                      type: e.target.value,
+                    }))
+                  }
+                  type="radio"
+                  id="repayment"
+                  className="cursor-pointer"
+                  name="type"
+                />
+                <label htmlFor="repayment" className="cursor-pointer">
+                  Repayment
+                </label>
               </label>
-            </label>
-            <label
-              className="form-control d-flex gap-3 cursor-pointer"
-              id="interest"
-            >
-              <input type="checkbox" id="interest" className="cursor-pointer" />
-              <label htmlFor="interest" className="cursor-pointer">
-                Interest Only
+              <label
+                className="form-control d-flex gap-3 cursor-pointer"
+                id="interest"
+              >
+                <input
+                  value={"interest"}
+                  onChange={(e) =>
+                    setFormState((current) => ({
+                      ...current,
+                      type: e.target.value,
+                    }))
+                  }
+                  name="type"
+                  type="radio"
+                  id="interest"
+                  className="cursor-pointer"
+                />
+                <label htmlFor="interest" className="cursor-pointer">
+                  Interest Only
+                </label>
               </label>
-            </label>
-          </div>
-          <div>
-            <button className="btn  rounded-pill cal-button align-self-md-start">
-              <img src={calButtton} alt="cal button svg" />
-              <span> Calculate Repayments</span>
-            </button>
-          </div>
+            </div>
+            <div>
+              <button className="btn  rounded-pill cal-button align-self-md-start">
+                <img src={calButtton} alt="cal button svg" />
+                <span> Calculate Repayments</span>
+              </button>
+            </div>
+          </form>
         </section>
         <section className="col-12 col-md-6 logo-section p-3 px-5 text-light green-section rounded-end">
           <div className="d-flex flex-column gap-md-5">
