@@ -17,16 +17,50 @@ export const Home = () => {
           </div>
           <div>
             <label htmlFor="amount">Mortgage Amount</label>
-            <input type="number" id="amount" className="form-control" />
+            <div className="d-flex">
+              <div
+                style={{ backgroundColor: "var(--slate-300)" }}
+                className="p-2 px-4 rounded-start"
+              >
+                <span> $</span>
+              </div>
+              <input
+                type="number"
+                id="amount"
+                className="form-control rounded-start-0"
+              />
+            </div>
           </div>
           <div className="row gap-3 gap-md-0">
             <div className="col-12 col-md-6">
               <label htmlFor="term">Mortgage Term</label>
-              <input type="number" id="term" className="form-control" />
+              <div className="d-flex">
+                <input
+                  type="number"
+                  id="term"
+                  className="form-control rounded-end-0"
+                />{" "}
+                <div
+                  style={{ backgroundColor: "var(--slate-300)" }}
+                  className="p-2 px-4 rounded-end"
+                >
+                  <span>years</span>
+                </div>
+              </div>
             </div>
             <div className="col-12 col-md-6">
               <label htmlFor="rate">Interest Rate</label>
-              <input type="number" id="rate" className="form-control" />
+
+              <div className="d-flex">
+                {" "}
+                <input type="number" id="rate" className="form-control " />
+                <div
+                  style={{ backgroundColor: "var(--slate-300)" }}
+                  className="p-2 px-4 rounded-end"
+                >
+                  <span>%</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="type-section d-flex flex-column gap-3">

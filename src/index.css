@@ -45,6 +45,9 @@ button.cal-button:hover {
   background-color: var(--white);
   border-bottom-right-radius: 7px;
 }
-.green-section {
-  border-bottom-left-radius: 7rem;
+
+@media (min-width: 768px) {
+  .green-section {
+    border-bottom-left-radius: 7rem;
+  }
 }
