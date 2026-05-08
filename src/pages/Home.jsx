@@ -6,15 +6,14 @@ export const Home = () => {
     amount: "",
     term: "",
     rate: "",
-    type: "",
+    type: "repayment",
   });
   const [errors, setErrors] = useState({
     amountError: "",
     termError: "",
     rateError: "",
   });
-  const [mothlyPayment, setMonthlyPayment] = useState();
-  const [yearsPayment, setYearsPayment] = useState();
+  const [result, setResult] = useState({ monthly: 0, total: 0 });
 
   const handleSumbmit = (e) => {
     let hasError = false;
@@ -59,9 +58,20 @@ export const Home = () => {
       }));
       hasError = true;
     }
-
     if (hasError) {
       return;
+    }
+    const P = Number(formState.amount);
+    const r = Number(formState.rate) / 100 / 12;
+    const n = Number(formState.term) * 12;
+    if (formState.type === "repayment") {
+      const monthly = P * ((r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1));
+      const total = monthly * n;
+      setResult({ monthly, total });
+    } else {
+      const monthly = P * r;
+      const total = monthly * n;
+      setResult({ monthly, total });
     }
   };
   return (
@@ -232,12 +242,16 @@ export const Home = () => {
             </div>
             <div className="p-3 result-section">
               <div className=" border-bottom">
-                <p className="text-light">Your monthly payments</p>
-                <h1 className="result">$1797.74</h1>
+                <p className="text-light m-0">Your monthly payments</p>
+                <h1 className="result">
+                  $ {Number(result.monthly.toFixed(2)).toLocaleString()}
+                </h1>
               </div>
-              <div className="text-light">
-                <p>Total you'll repay over the term</p>
-                <h3>$ 539,322.94</h3>
+              <div className="text-light ">
+                <p className="m-0 mt-3">Total you'll repay over the term</p>
+                <h3 className="m-0">
+                  $ {Number(result.total.toFixed(2)).toLocaleString()}
+                </h3>
               </div>
             </div>
           </div>
