@@ -14,7 +14,15 @@ export const Home = () => {
     rateError: "",
   });
   const [result, setResult] = useState({ monthly: 0, total: 0 });
-
+  const clearAll = () => {
+    setFormState({ amount: "", term: "", rate: "", type: "repayment" });
+    setErrors({
+      amountError: "",
+      termError: "",
+      rateError: "",
+    });
+    setResult({ monthly: 0, total: 0 });
+  };
   const handleSumbmit = (e) => {
     let hasError = false;
     e.preventDefault();
@@ -83,7 +91,10 @@ export const Home = () => {
         <section className="col-12 col-md-6 p-3 d-flex flex-column gap-4 form-section rounded-start ">
           <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
             <h1>Mortgage Calculator</h1>
-            <span className="text-muted text-decoration-underline cursor-pointer d-inline">
+            <span
+              className="text-muted text-decoration-underline cursor-pointer d-inline"
+              onClick={clearAll}
+            >
               Clear All
             </span>
           </div>
