@@ -1,5 +1,6 @@
 import { useState } from "react";
 import calButtton from "../assets/images/icon-calculator.svg";
+import emptyState from "../assets/images/illustration-empty.svg";
 
 export const Home = () => {
   const [formState, setFormState] = useState({
@@ -14,6 +15,7 @@ export const Home = () => {
     rateError: "",
   });
   const [result, setResult] = useState({ monthly: 0, total: 0 });
+  const [hasCalculated, setHasCalculated] = useState(false);
   const clearAll = () => {
     setFormState({ amount: "", term: "", rate: "", type: "repayment" });
     setErrors({
@@ -22,6 +24,7 @@ export const Home = () => {
       rateError: "",
     });
     setResult({ monthly: 0, total: 0 });
+    setHasCalculated(false);
   };
   const handleSumbmit = (e) => {
     let hasError = false;
@@ -78,9 +81,10 @@ export const Home = () => {
       setResult({ monthly, total });
     } else {
       const monthly = P * r;
-      const total = monthly * n;
+      const total = P + monthly * n;
       setResult({ monthly, total });
     }
+    setHasCalculated(true);
   };
   return (
     <div
@@ -88,7 +92,7 @@ export const Home = () => {
       style={{ minHeight: "100vh" }}
     >
       <div className="container  d-flex flex-column  flex-md-row justify-content-md-center ">
-        <section className="col-12 col-md-6 p-3 d-flex flex-column gap-4 form-section rounded-start ">
+        <section className="col-12 col-md-6 p-md-5 p-3 d-flex flex-column gap-4 form-section rounded-start ">
           <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
             <h1>Mortgage Calculator</h1>
             <span
@@ -241,31 +245,47 @@ export const Home = () => {
             </div>
           </form>
         </section>
-        <section className="col-12 col-md-6 logo-section p-3 px-5 text-light green-section rounded-end">
-          <div className="d-flex flex-column gap-md-5">
-            <div>
-              <h2>Your Results</h2>
+        <section className="col-12 col-md-6 logo-section p-3 px-5 text-light green-section rounded rounded-md-end ">
+          {hasCalculated ? (
+            <div className="d-flex flex-column gap-md-5">
+              <div>
+                <h2>Your Results</h2>
+                <p>
+                  Your results are shown below based on the information you
+                  provided, to adjust the results, edit the form and hit the
+                  calculate button again
+                </p>
+              </div>
+              <div className="p-3 result-section">
+                <div className=" border-bottom">
+                  <p className="text-light m-0">Your monthly payments</p>
+                  <h1 className="result">
+                    $ {Number(result.monthly.toFixed(2)).toLocaleString()}
+                  </h1>
+                </div>
+                <div className="text-light ">
+                  <p className="m-0 mt-3">Total you'll repay over the term</p>
+                  <h3 className="m-0">
+                    $ {Number(result.total.toFixed(2)).toLocaleString()}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="text-center px-3 d-flex flex-column justify-content-center h-100">
+              <img
+                src={emptyState}
+                alt="empty state illustration image"
+                style={{ width: "15rem" }}
+                className="mx-auto"
+              />
+              <h3>Results shown here</h3>{" "}
               <p>
-                Your results are shown below based on the information you
-                provided, to adjust the results, edit the form and hit the
-                calculate button again
+                Complete the form and click "calculate repayments" to see what
+                your monthly repayments would be{" "}
               </p>
             </div>
-            <div className="p-3 result-section">
-              <div className=" border-bottom">
-                <p className="text-light m-0">Your monthly payments</p>
-                <h1 className="result">
-                  $ {Number(result.monthly.toFixed(2)).toLocaleString()}
-                </h1>
-              </div>
-              <div className="text-light ">
-                <p className="m-0 mt-3">Total you'll repay over the term</p>
-                <h3 className="m-0">
-                  $ {Number(result.total.toFixed(2)).toLocaleString()}
-                </h3>
-              </div>
-            </div>
-          </div>
+          )}
         </section>
       </div>
     </div>
