@@ -95,12 +95,12 @@ export const Home = () => {
         <section className="col-12 col-md-6 p-md-5 p-3 d-flex flex-column gap-4 form-section rounded-start ">
           <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center">
             <h1>Mortgage Calculator</h1>
-            <span
-              className="text-muted text-decoration-underline cursor-pointer d-inline"
+            <button
+              className="text-muted text-decoration-underline cursor-pointer d-inline btn"
               onClick={clearAll}
             >
               Clear All
-            </span>
+            </button>
           </div>
           <form className="d-flex flex-column gap-3" onSubmit={handleSumbmit}>
             <div>
