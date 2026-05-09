@@ -2,19 +2,35 @@ import { useState } from "react";
 import calButtton from "../assets/images/icon-calculator.svg";
 import emptyState from "../assets/images/illustration-empty.svg";
 
+interface Formstate {
+  amount: string;
+  term: string;
+  rate: string;
+  type: "repayment" | "interest";
+}
+interface Errors {
+  amountError: string;
+  termError: string;
+  rateError: string;
+}
+interface Results {
+  monthly: number;
+  total: number;
+}
+
 export const Home = () => {
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<Formstate>({
     amount: "",
     term: "",
     rate: "",
     type: "repayment",
   });
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<Errors>({
     amountError: "",
     termError: "",
     rateError: "",
   });
-  const [result, setResult] = useState({ monthly: 0, total: 0 });
+  const [result, setResult] = useState<Results>({ monthly: 0, total: 0 });
   const [hasCalculated, setHasCalculated] = useState(false);
   const clearAll = () => {
     setFormState({ amount: "", term: "", rate: "", type: "repayment" });
@@ -26,7 +42,7 @@ export const Home = () => {
     setResult({ monthly: 0, total: 0 });
     setHasCalculated(false);
   };
-  const handleSumbmit = (e) => {
+  const handleSumbmit = (e: React.SyntheticEvent<HTMLFormElement>) => {
     let hasError = false;
     e.preventDefault();
     setErrors({ amountError: "", termError: "", rateError: "" });
@@ -201,10 +217,10 @@ export const Home = () => {
                 <input
                   checked={formState.type === "repayment"}
                   value={"repayment"}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFormState((current) => ({
                       ...current,
-                      type: e.target.value,
+                      type: e.target.value as "repayment" | "interest",
                     }))
                   }
                   type="radio"
@@ -221,10 +237,10 @@ export const Home = () => {
                 <input
                   checked={formState.type === "interest"}
                   value={"interest"}
-                  onChange={(e) =>
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFormState((current) => ({
                       ...current,
-                      type: e.target.value,
+                      type: e.target.value as "repayment" | "interest",
                     }))
                   }
                   name="type"
