@@ -195,10 +195,11 @@ export const Home = () => {
             <div className="type-section d-flex flex-column gap-3">
               <span>Mortgage Type</span>
               <label
-                className="form-control d-flex gap-3 cursor-pointer"
+                className={`cursor-pointer ${formState.type === "repayment" ? "active-type" : ""} form-control d-flex gap-3`}
                 id="repayment"
               >
                 <input
+                  checked={formState.type === "repayment"}
                   value={"repayment"}
                   onChange={(e) =>
                     setFormState((current) => ({
@@ -211,15 +212,14 @@ export const Home = () => {
                   className="cursor-pointer"
                   name="type"
                 />
-                <label htmlFor="repayment" className="cursor-pointer">
-                  Repayment
-                </label>
+                <span className="cursor-pointer">Repayment</span>
               </label>
               <label
-                className="form-control d-flex gap-3 cursor-pointer"
+                className={`cursor-pointer ${formState.type === "interest" ? "active-type" : ""} form-control d-flex gap-3`}
                 id="interest"
               >
                 <input
+                  checked={formState.type === "interest"}
                   value={"interest"}
                   onChange={(e) =>
                     setFormState((current) => ({
@@ -232,9 +232,7 @@ export const Home = () => {
                   id="interest"
                   className="cursor-pointer"
                 />
-                <label htmlFor="interest" className="cursor-pointer">
-                  Interest Only
-                </label>
+                <span className="cursor-pointer">Interest Only</span>
               </label>
             </div>
             <div>

@@ -46,6 +46,16 @@ button.cal-button:hover {
   background-color: var(--white);
   border-bottom-right-radius: 7px;
 }
+input:focus {
+  border-color: var(--lime);
+  background-color: var(--lime);
+}
+.form-control.active-type {
+  background-color: var(--lime);
+  opacity: 0.7;
+  border-color: var(--lime);
+  font-weight: bold;
+}
 
 @media (min-width: 768px) {
   .green-section {
