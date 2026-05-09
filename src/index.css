@@ -1,0 +1,68 @@
+:root {
+  /* Colors */
+
+  /* Primary */
+
+  --lime: hsl(61, 70%, 52%);
+  --red: hsl(4, 69%, 50%);
+
+  /* Neutral */
+
+  --white: hsl(0, 0%, 100%);
+  --slate-100: hsl(202, 86%, 94%);
+  --slate-300: hsl(203, 41%, 72%);
+  --slate-500: hsl(200, 26%, 54%);
+  --slate-700: hsl(200, 24%, 40%);
+  --slate-900: hsl(202, 55%, 16%);
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+main.app,
+.home-page {
+  background-color: var(--slate-300);
+  min-height: 100vh;
+}
+button.cal-button,
+button.cal-button:hover {
+  background-color: var(--lime);
+  width: 100%;
+}
+
+.logo-section {
+  background-color: rgb(18, 38, 51) !important;
+}
+.result-section {
+  background-color: rgb(24, 45, 59) !important;
+}
+.result {
+  color: var(--lime);
+}
+.result-section {
+  border-top: 5px solid var(--lime);
+  border-radius: 1rem;
+}
+.form-section {
+  background-color: var(--white);
+  border-bottom-right-radius: 7px;
+}
+input:focus {
+  border-color: var(--lime);
+  background-color: var(--lime);
+}
+.form-control.active-type {
+  background-color: var(--lime);
+  opacity: 0.7;
+  border-color: var(--lime);
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .green-section {
+    border-bottom-left-radius: 7rem;
+  }
+  button.cal-button,
+  button.cal-button:hover {
+    width: 50%;
+  }
+}
